@@ -1,0 +1,12 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- Sonne -->
+    <path android:fillColor="#F2B134" android:pathData="M54,38m-9,0a9,9 0,1 1,18 0a9,9 0,1 1,-18 0" />
+    <path android:strokeColor="#F2B134" android:strokeWidth="2.5" android:strokeLineCap="round"
+        android:pathData="M54,23L54,26 M54,50L54,53 M39,38L42,38 M66,38L69,38 M43.4,27.4L45.5,29.5 M62.5,46.5L64.6,48.6 M64.6,27.4L62.5,29.5 M45.5,46.5L43.4,48.6" />
+    <!-- Modul -->
+    <path android:fillColor="#5AA9E6" android:pathData="M34,58L74,58L80,80L28,80Z" />
+    <path android:strokeColor="#11151B" android:strokeWidth="1.6"
+        android:pathData="M54,58L54,80 M31,69L77,69 M44,58L41,80 M64,58L67,80" />
+</vector>
