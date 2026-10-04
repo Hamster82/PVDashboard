@@ -3,6 +3,9 @@ name: APK bauen
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'alexa-skill/**'
+      - '*.md'
   workflow_dispatch:
 
 permissions:

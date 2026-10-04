@@ -46,3 +46,10 @@ Ohne Wechselrichter rechnet die App mit dem Wettermodell und einem geschätzten 
 Jeder Push auf `main` baut über GitHub Actions eine signierte APK und veröffentlicht sie als Release.
 
 `app/pvdashboard.keystore` ist ein eigener Schlüssel nur für diese App. Er liegt im Repository, damit jede neue Version sich über die alte installieren lässt.
+
+## Alexa-Skill
+
+Der passende Alexa-Skill für den Echo Show liegt im Ordner [`alexa-skill`](alexa-skill/).
+- Komplettpaket zum Herunterladen: [solar-planer.zip](https://github.com/Hamster82/PVDashboard/raw/main/alexa-skill/solar-planer.zip)
+- Anleitung: [alexa-skill/ANLEITUNG.md](alexa-skill/ANLEITUNG.md)
+- Das Passwort des Wechselrichters nur in der Developer-Konsole in `config.js` eintragen, nicht hier im öffentlichen Repository.

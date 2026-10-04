@@ -1,0 +1,189 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "p. v.",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "GeraetIntent",
+          "slots": [
+            {
+              "name": "geraet",
+              "type": "GERAET"
+            },
+            {
+              "name": "tag",
+              "type": "TAG"
+            }
+          ],
+          "samples": [
+            "wann soll ich die {geraet} starten",
+            "wann soll ich den {geraet} starten",
+            "wann starte ich die {geraet}",
+            "wann starte ich den {geraet}",
+            "wann soll ich {tag} die {geraet} starten",
+            "wann soll ich {tag} den {geraet} starten",
+            "wann ist die beste zeit für die {geraet}",
+            "wann ist die beste zeit für den {geraet}",
+            "wann lohnt sich die {geraet}",
+            "wann lohnt sich der {geraet}",
+            "wann kann ich {tag} {geraet}",
+            "beste zeit für {geraet}",
+            "wann {geraet}",
+            "{geraet}"
+          ]
+        },
+        {
+          "name": "PrognoseIntent",
+          "slots": [
+            {
+              "name": "tag",
+              "type": "TAG"
+            }
+          ],
+          "samples": [
+            "wie viel sonne gibt es {tag}",
+            "wie viel strom erzeuge ich {tag}",
+            "wie viel solarstrom gibt es {tag}",
+            "wie wird der ertrag {tag}",
+            "prognose für {tag}",
+            "prognose"
+          ]
+        },
+        {
+          "name": "WocheIntent",
+          "samples": [
+            "zeig die woche",
+            "wochenübersicht",
+            "wie war die woche",
+            "woche",
+            "letzte woche"
+          ]
+        },
+        {
+          "name": "MonatIntent",
+          "samples": [
+            "zeig den monat",
+            "monatsübersicht",
+            "wie war der monat",
+            "monat",
+            "monate"
+          ]
+        },
+        {
+          "name": "HeuteIntent",
+          "samples": [
+            "zeig heute",
+            "dashboard",
+            "übersicht",
+            "startseite",
+            "aktualisieren"
+          ]
+        },
+        {
+          "name": "StatusIntent",
+          "samples": [
+            "strom",
+            "pv strom",
+            "status",
+            "kurzstatus",
+            "nach dem strom",
+            "nach dem status",
+            "nach dem stand",
+            "aktueller stand",
+            "wie ist der stand",
+            "wie ist der status",
+            "wie sieht es aus",
+            "wie sieht es mit dem strom aus",
+            "was macht der strom",
+            "was macht die anlage",
+            "überschuss",
+            "wie viel überschuss habe ich"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "GERAET",
+          "values": [
+            {
+              "id": "waschmaschine",
+              "name": {
+                "value": "waschmaschine",
+                "synonyms": [
+                  "wäsche",
+                  "waschen",
+                  "die wäsche"
+                ]
+              }
+            },
+            {
+              "id": "spuelmaschine",
+              "name": {
+                "value": "spülmaschine",
+                "synonyms": [
+                  "geschirrspüler",
+                  "spüler",
+                  "geschirrspülmaschine",
+                  "spülen"
+                ]
+              }
+            },
+            {
+              "id": "trockner",
+              "name": {
+                "value": "trockner",
+                "synonyms": [
+                  "wäschetrockner",
+                  "trocknen"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TAG",
+          "values": [
+            {
+              "id": "heute",
+              "name": {
+                "value": "heute",
+                "synonyms": [
+                  "heute noch"
+                ]
+              }
+            },
+            {
+              "id": "morgen",
+              "name": {
+                "value": "morgen",
+                "synonyms": [
+                  "morgen früh"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
