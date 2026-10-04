@@ -119,6 +119,19 @@
             "überschuss",
             "wie viel überschuss habe ich"
           ]
+        },
+        {
+          "name": "SonneIntent",
+          "samples": [
+            "zeig die sonnenstunden",
+            "sonnenstunden",
+            "wie viele sonnenstunden gibt es",
+            "wie viel sonne gibt es diese woche",
+            "sonnenprognose",
+            "nach den sonnenstunden",
+            "wie wird das wetter",
+            "wetter"
+          ]
         }
       ],
       "types": [

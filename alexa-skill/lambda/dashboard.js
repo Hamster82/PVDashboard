@@ -192,6 +192,28 @@ async function collect(store) {
   }
   const monat = chartBlock('Letzte 6 Monate', monatRows, 270);
 
+  // ---------- Seite "Sonne": Sonnenstunden der nächsten 7 Tage ----------
+  const sonnenTage = [];
+  for (let i = 0; i < 7; i++) {
+    const d = U.addDays(today, i);
+    const so = model.sonne && model.sonne[d];
+    if (!so) continue;
+    sonnenTage.push({ d, i, ...so, kwh: model.days[d] ? model.days[d].kwh * k : null });
+  }
+  const maxTag = Math.max(1, ...sonnenTage.map((t) => t.tagH || t.sonneH));
+  const SONNE_H = 290;
+  const sonne = {
+    tage: sonnenTage.map((t) => ({
+      label: t.i === 0 ? 'Heute' : t.i === 1 ? 'Morgen' : WT_KURZ[U.weekday(t.d)],
+      bar: Math.max(2, Math.round((t.sonneH / maxTag) * SONNE_H)),
+      track: Math.round(((t.tagH || t.sonneH) / maxTag) * SONNE_H),
+      wert: `${U.fmt(t.sonneH)} h`,
+      kwh: t.kwh === null ? '' : `${Math.round(t.kwh)} kWh`,
+      farbe: t.tagH && t.sonneH / t.tagH >= 0.5 ? C.sun : (t.tagH && t.sonneH / t.tagH >= 0.2 ? '#c99a3a' : C.muted),
+    })),
+    summe: sonnenTage.length ? `${U.fmt(sonnenTage.reduce((a, t) => a + t.sonneH, 0), 0)} Sonnenstunden in ${sonnenTage.length} Tagen` : 'Keine Sonnenstunden-Prognose verfügbar',
+  };
+
   const datum = `${WT[U.weekday(today)]}, ${+today.slice(8, 10)}. ${MON[+today.slice(5, 7) - 1]}`;
   const view = {
     datum,
@@ -206,6 +228,7 @@ async function collect(store) {
     stunden,
     woche,
     monat,
+    sonne,
     quelle: live ? 'Live-Daten: Kostal Plenticore' : (invFehler ? `Wechselrichter nicht erreichbar (${invFehler}) – Werte geschätzt` : 'Wettermodell Open-Meteo · Verbrauch geschätzt'),
     stand: `Stand ${U.pad(now.hour)}:${U.pad(now.minute)}`,
   };
@@ -222,7 +245,10 @@ async function collect(store) {
     heuteKwh,
     morgenKwh,
   };
-  return { store, view, speech: teile.join(' '), plan, status };
+  const sonnenSprache = sonnenTage.length
+    ? 'Sonnenstunden: ' + sonnenTage.slice(0, 4).map((t) => `${t.i === 0 ? 'heute' : t.i === 1 ? 'morgen' : WT[U.weekday(t.d)]} ${Math.round(t.sonneH)}`).join(', ') + ' Stunden.'
+    : 'Für die Sonnenstunden liegt gerade keine Prognose vor.';
+  return { store, view, speech: teile.join(' '), plan, status, sonnenSprache };
 }
 
 /** Kurze Statusansage: Überschuss, Akku, Prognose und Startzeiten aller Geräte */
@@ -297,7 +323,7 @@ function fehlerView(msg, now) {
   return {
     datum: 'Solar-Planer', heuteKwh: '–', heuteWetter: msg, morgenKwh: '–', morgenWetter: '',
     live: [], jetzt: { text: 'Daten werden beim nächsten Aufruf neu geladen', farbe: C.warn }, geraete: [], hinweis: '', stunden: [],
-    woche: leer, monat: leer, quelle: msg, stand: `Stand ${U.pad(now.hour)}:${U.pad(now.minute)}`,
+    woche: leer, monat: leer, sonne: { tage: [], summe: '' }, quelle: msg, stand: `Stand ${U.pad(now.hour)}:${U.pad(now.minute)}`,
   };
 }
 

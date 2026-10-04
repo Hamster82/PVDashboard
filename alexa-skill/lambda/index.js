@@ -3,7 +3,7 @@ const cfg = require('./config');
 const dashboard = require('./dashboard');
 const aplDoc = require('./apl/dashboard.json');
 
-const SEITE = { heute: 0, woche: 1, monat: 2 };
+const SEITE = { heute: 0, woche: 1, monat: 2, sonne: 3 };
 
 function hasApl(hi) {
   const ifs = Alexa.getSupportedInterfaces(hi.requestEnvelope);
@@ -97,6 +97,14 @@ const StatusHandler = {
   },
 };
 
+const SonneHandler = {
+  canHandle: (hi) => Alexa.getRequestType(hi.requestEnvelope) === 'IntentRequest' && Alexa.getIntentName(hi.requestEnvelope) === 'SonneIntent',
+  async handle(hi) {
+    const r = await laden(hi);
+    return antwort(hi, r, r.sonnenSprache || r.speech, SEITE.sonne);
+  },
+};
+
 const PrognoseHandler = {
   canHandle: (hi) => Alexa.getRequestType(hi.requestEnvelope) === 'IntentRequest' && Alexa.getIntentName(hi.requestEnvelope) === 'PrognoseIntent',
   async handle(hi) {
@@ -119,7 +127,7 @@ const HelpHandler = {
   handle(hi) {
     const namen = cfg.geraete.map((g) => g.name).join(', ');
     return hi.responseBuilder
-      .speak(`Frag mich zum Beispiel: Wann soll ich die Waschmaschine starten? Ich kenne: ${namen}. Oder sag: Zeig die Woche, oder: Zeig den Monat.`)
+      .speak(`Frag mich zum Beispiel: Wann soll ich die Waschmaschine starten? Ich kenne: ${namen}. Oder sag: Zeig die Woche, Zeig den Monat oder Zeig die Sonnenstunden.`)
       .reprompt('Was möchtest du wissen?')
       .getResponse();
   },
@@ -164,7 +172,7 @@ function persistence() {
 }
 
 exports.handler = Alexa.SkillBuilders.custom()
-  .addRequestHandlers(LaunchHandler, HeuteHandler, SeiteHandler, GeraetHandler, StatusHandler, PrognoseHandler, RefreshHandler, HelpHandler, StopHandler, FallbackHandler, SessionEndedHandler)
+  .addRequestHandlers(LaunchHandler, HeuteHandler, SeiteHandler, GeraetHandler, StatusHandler, SonneHandler, PrognoseHandler, RefreshHandler, HelpHandler, StopHandler, FallbackHandler, SessionEndedHandler)
   .addErrorHandlers(ErrorHandler)
   .withPersistenceAdapter(persistence())
   .lambda();

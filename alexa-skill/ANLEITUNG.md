@@ -62,11 +62,12 @@ Das Aufrufwort ist **„PV“**: Im Sprachmodell steht es als `p. v.` (so schrei
 | „Alexa, frag PV, wann soll ich die Spülmaschine starten?“ | Beste Startzeit heute (oder morgen) |
 | „Alexa, frag PV, wann soll ich morgen den Trockner starten?“ | Plan für morgen |
 | „Alexa, frag PV nach der Prognose für morgen“ | Ertrag morgen |
+| „Alexa, frag PV nach den Sonnenstunden“ / „Zeig die Sonnenstunden“ | Seite „Sonne“: Sonnenstunden der nächsten 7 Tage |
 | „Alexa, frag PV nach dem Status“ | Kurzansage: Überschuss, Akku, Prognose, Startzeiten |
 | **„Alexa, PV Strom“** (über Routine, siehe unten) | dieselbe Kurzansage |
 | „Zeig die Woche“ / „Zeig den Monat“ (während der Skill offen ist) | Diagrammseiten |
 
-Auf dem Display kannst du zwischen **Heute · Woche · Monat** wischen.
+Auf dem Display kannst du zwischen **Heute · Woche · Monat · Sonne** wischen. Die Seite „Sonne“ zeigt die prognostizierten Sonnenstunden der nächsten 7 Tage (Balken vor der Tageslichtdauer) und darunter den erwarteten PV-Ertrag.
 
 Versteht Alexa „PV“ nicht zuverlässig (bei Abkürzungen kommt das vor), stell das Aufrufwort unter *Build → Invocations → Skill Invocation Name* auf `pv anlage` um. Danach **Save** und **Build skill**; ab dann sagst du „Alexa, öffne PV Anlage“.
 

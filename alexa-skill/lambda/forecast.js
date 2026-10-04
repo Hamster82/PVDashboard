@@ -18,7 +18,8 @@ async function load(cfg) {
       azimuth: f.azimut,
       timezone: 'Europe/Berlin',
       past_days: 92,
-      forecast_days: 3,
+      forecast_days: 7,
+      ...(i === 0 ? { daily: 'sunshine_duration,daylight_duration' } : {}),
     }),
     timeoutMs: 4500,
   })));
@@ -55,7 +56,17 @@ function buildModel(cfg, resps) {
     out[d] = { kw: v.kw, kwh: v.kw.reduce((a, b) => a + b, 0), cloud: v.cloudN ? v.cloudSum / v.cloudN : null };
   }
   const firstDate = h0.time[0].slice(0, 10); // ab hier ist jeder Tag vollständig
-  return { days: out, firstDate };
+  // Sonnenstunden und Tageslänge je Tag (Sekunden -> Stunden)
+  const sonne = {};
+  const dl = resps[0].daily;
+  if (dl && dl.time) {
+    dl.time.forEach((d, i) => {
+      const s = dl.sunshine_duration ? dl.sunshine_duration[i] : null;
+      const t = dl.daylight_duration ? dl.daylight_duration[i] : null;
+      if (s !== null && s !== undefined) sonne[d] = { sonneH: s / 3600, tagH: t ? t / 3600 : null };
+    });
+  }
+  return { days: out, firstDate, sonne };
 }
 
 function wetterText(cloud) {

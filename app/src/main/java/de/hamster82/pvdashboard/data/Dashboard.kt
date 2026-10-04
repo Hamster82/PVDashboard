@@ -21,6 +21,9 @@ data class Bilanz(
     val geschaetzt: Boolean,
 )
 
+/** Sonnenstunden-Prognose eines Tages mit erwartetem PV-Ertrag */
+data class SonnenPrognose(val datum: LocalDate, val sonneH: Double, val tagH: Double?, val kwh: Double?)
+
 data class DashboardData(
     val zeit: LocalDateTime,
     val heuteKwh: Double?,
@@ -40,6 +43,7 @@ data class DashboardData(
     val woche: Bilanz,
     val monat: Bilanz,
     val kalibrierung: Double,
+    val sonne: List<SonnenPrognose> = emptyList(),
 )
 
 object Dashboard {
@@ -107,6 +111,8 @@ object Dashboard {
             woche = woche(s, hist, model, k, jetzt),
             monat = monate(s, hist, model, k, jetzt),
             kalibrierung = k,
+            sonne = model.sonne.filter { !it.datum.isBefore(heute) }.take(7)
+                .map { SonnenPrognose(it.datum, it.sonneH, it.tagH, model.days[it.datum]?.kwh?.times(k)) },
         )
     }
 

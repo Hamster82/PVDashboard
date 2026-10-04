@@ -2,7 +2,9 @@
   "type": "APL",
   "version": "2023.3",
   "theme": "dark",
-  "settings": { "idleTimeout": 1800000 },
+  "settings": {
+    "idleTimeout": 1800000
+  },
   "resources": [
     {
       "colors": {
@@ -21,14 +23,30 @@
       "type": "Sequential",
       "repeatCount": 96,
       "commands": [
-        { "type": "Idle", "delay": 900000 },
-        { "type": "SendEvent", "arguments": ["refresh"] }
+        {
+          "type": "Idle",
+          "delay": 900000
+        },
+        {
+          "type": "SendEvent",
+          "arguments": [
+            "refresh"
+          ]
+        }
       ]
     }
   ],
   "layouts": {
     "Kachel": {
-      "parameters": ["label", "value", { "name": "farbe", "type": "string", "default": "#eef1f4" }],
+      "parameters": [
+        "label",
+        "value",
+        {
+          "name": "farbe",
+          "type": "string",
+          "default": "#eef1f4"
+        }
+      ],
       "item": {
         "type": "Frame",
         "backgroundColor": "@card",
@@ -41,14 +59,34 @@
         "item": {
           "type": "Container",
           "items": [
-            { "type": "Text", "text": "${label}", "fontSize": 15, "color": "@muted", "maxLines": 1 },
-            { "type": "Text", "text": "${value}", "fontSize": 26, "fontWeight": "bold", "color": "${farbe}", "maxLines": 1 }
+            {
+              "type": "Text",
+              "text": "${label}",
+              "fontSize": 15,
+              "color": "@muted",
+              "maxLines": 1
+            },
+            {
+              "type": "Text",
+              "text": "${value}",
+              "fontSize": 26,
+              "fontWeight": "bold",
+              "color": "${farbe}",
+              "maxLines": 1
+            }
           ]
         }
       }
     },
     "Balkenpaar": {
-      "parameters": ["label", "yh", "ch", "yo", "co", "yv"],
+      "parameters": [
+        "label",
+        "yh",
+        "ch",
+        "yo",
+        "co",
+        "yv"
+      ],
       "item": {
         "type": "Container",
         "grow": 1,
@@ -56,18 +94,46 @@
         "justifyContent": "end",
         "alignItems": "center",
         "items": [
-          { "type": "Text", "text": "${yv}", "fontSize": 14, "color": "@sun", "maxLines": 1 },
+          {
+            "type": "Text",
+            "text": "${yv}",
+            "fontSize": 14,
+            "color": "@sun",
+            "maxLines": 1
+          },
           {
             "type": "Container",
             "direction": "row",
             "alignItems": "end",
             "spacing": 4,
             "items": [
-              { "type": "Frame", "width": 22, "height": "${yh}", "borderRadius": 3, "backgroundColor": "@sun", "opacity": "${yo}" },
-              { "type": "Frame", "width": 22, "height": "${ch}", "borderRadius": 3, "backgroundColor": "@cons", "opacity": "${co}", "spacing": 4 }
+              {
+                "type": "Frame",
+                "width": 22,
+                "height": "${yh}",
+                "borderRadius": 3,
+                "backgroundColor": "@sun",
+                "opacity": "${yo}"
+              },
+              {
+                "type": "Frame",
+                "width": 22,
+                "height": "${ch}",
+                "borderRadius": 3,
+                "backgroundColor": "@cons",
+                "opacity": "${co}",
+                "spacing": 4
+              }
             ]
           },
-          { "type": "Text", "text": "${label}", "fontSize": 15, "color": "@muted", "spacing": 6, "maxLines": 1 }
+          {
+            "type": "Text",
+            "text": "${label}",
+            "fontSize": 15,
+            "color": "@muted",
+            "spacing": 6,
+            "maxLines": 1
+          }
         ]
       }
     },
@@ -78,15 +144,42 @@
         "direction": "row",
         "alignItems": "center",
         "items": [
-          { "type": "Frame", "width": 12, "height": 12, "borderRadius": 2, "backgroundColor": "@sun" },
-          { "type": "Text", "text": "Ertrag", "fontSize": 14, "color": "@muted", "spacing": 6 },
-          { "type": "Frame", "width": 12, "height": 12, "borderRadius": 2, "backgroundColor": "@cons", "spacing": 18 },
-          { "type": "Text", "text": "Verbrauch", "fontSize": 14, "color": "@muted", "spacing": 6 }
+          {
+            "type": "Frame",
+            "width": 12,
+            "height": 12,
+            "borderRadius": 2,
+            "backgroundColor": "@sun"
+          },
+          {
+            "type": "Text",
+            "text": "Ertrag",
+            "fontSize": 14,
+            "color": "@muted",
+            "spacing": 6
+          },
+          {
+            "type": "Frame",
+            "width": 12,
+            "height": 12,
+            "borderRadius": 2,
+            "backgroundColor": "@cons",
+            "spacing": 18
+          },
+          {
+            "type": "Text",
+            "text": "Verbrauch",
+            "fontSize": 14,
+            "color": "@muted",
+            "spacing": 6
+          }
         ]
       }
     },
     "Diagrammseite": {
-      "parameters": ["block"],
+      "parameters": [
+        "block"
+      ],
       "item": {
         "type": "Container",
         "width": "100%",
@@ -101,8 +194,16 @@
             "justifyContent": "spaceBetween",
             "alignItems": "center",
             "items": [
-              { "type": "Text", "text": "${block.titel}", "fontSize": 24, "fontWeight": "bold", "color": "@text" },
-              { "type": "Legende" }
+              {
+                "type": "Text",
+                "text": "${block.titel}",
+                "fontSize": 24,
+                "fontWeight": "bold",
+                "color": "@text"
+              },
+              {
+                "type": "Legende"
+              }
             ]
           },
           {
@@ -111,7 +212,13 @@
             "spacing": 12,
             "data": "${block.summen}",
             "items": [
-              { "type": "Kachel", "label": "${data.label}", "value": "${data.value}", "farbe": "${data.farbe}", "spacing": 10 }
+              {
+                "type": "Kachel",
+                "label": "${data.label}",
+                "value": "${data.value}",
+                "farbe": "${data.farbe}",
+                "spacing": 10
+              }
             ]
           },
           {
@@ -122,16 +229,179 @@
             "spacing": 10,
             "data": "${block.balken}",
             "items": [
-              { "type": "Balkenpaar", "label": "${data.label}", "yh": "${data.yh}", "ch": "${data.ch}", "yo": "${data.yo}", "co": "${data.co}", "yv": "${data.yv}" }
+              {
+                "type": "Balkenpaar",
+                "label": "${data.label}",
+                "yh": "${data.yh}",
+                "ch": "${data.ch}",
+                "yo": "${data.yo}",
+                "co": "${data.co}",
+                "yv": "${data.yv}"
+              }
             ]
           },
-          { "type": "Text", "text": "${block.fussnote}", "fontSize": 13, "color": "@muted", "spacing": 6, "maxLines": 2 }
+          {
+            "type": "Text",
+            "text": "${block.fussnote}",
+            "fontSize": 13,
+            "color": "@muted",
+            "spacing": 6,
+            "maxLines": 2
+          }
+        ]
+      }
+    },
+    "Sonnenseite": {
+      "parameters": [
+        "sonne"
+      ],
+      "item": {
+        "type": "Container",
+        "width": "100%",
+        "height": "100%",
+        "paddingLeft": 28,
+        "paddingRight": 28,
+        "paddingTop": 20,
+        "items": [
+          {
+            "type": "Container",
+            "direction": "row",
+            "justifyContent": "spaceBetween",
+            "alignItems": "center",
+            "items": [
+              {
+                "type": "Text",
+                "text": "Sonnenstunden – nächste 7 Tage",
+                "fontSize": 24,
+                "fontWeight": "bold",
+                "color": "@text"
+              },
+              {
+                "type": "Container",
+                "direction": "row",
+                "alignItems": "center",
+                "items": [
+                  {
+                    "type": "Frame",
+                    "width": 12,
+                    "height": 12,
+                    "borderRadius": 2,
+                    "backgroundColor": "@sun"
+                  },
+                  {
+                    "type": "Text",
+                    "text": "Sonne",
+                    "fontSize": 14,
+                    "color": "@muted",
+                    "spacing": 6
+                  },
+                  {
+                    "type": "Frame",
+                    "width": 12,
+                    "height": 12,
+                    "borderRadius": 2,
+                    "backgroundColor": "@card",
+                    "spacing": 18
+                  },
+                  {
+                    "type": "Text",
+                    "text": "Tageslicht",
+                    "fontSize": 14,
+                    "color": "@muted",
+                    "spacing": 6
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Text",
+            "text": "${sonne.summe}",
+            "fontSize": 16,
+            "color": "@muted",
+            "spacing": 4
+          },
+          {
+            "type": "Container",
+            "direction": "row",
+            "alignItems": "end",
+            "grow": 1,
+            "spacing": 10,
+            "data": "${sonne.tage}",
+            "items": [
+              {
+                "type": "Container",
+                "grow": 1,
+                "height": "100%",
+                "justifyContent": "end",
+                "alignItems": "center",
+                "items": [
+                  {
+                    "type": "Text",
+                    "text": "${data.wert}",
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                    "color": "${data.farbe}",
+                    "maxLines": 1
+                  },
+                  {
+                    "type": "Frame",
+                    "width": 56,
+                    "height": "${data.track}",
+                    "borderRadius": 6,
+                    "backgroundColor": "@card",
+                    "spacing": 4,
+                    "item": {
+                      "type": "Container",
+                      "width": "100%",
+                      "height": "100%",
+                      "justifyContent": "end",
+                      "items": [
+                        {
+                          "type": "Frame",
+                          "width": "100%",
+                          "height": "${data.bar}",
+                          "borderRadius": 6,
+                          "backgroundColor": "${data.farbe}"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "Text",
+                    "text": "${data.label}",
+                    "fontSize": 16,
+                    "color": "@text",
+                    "spacing": 6,
+                    "maxLines": 1
+                  },
+                  {
+                    "type": "Text",
+                    "text": "${data.kwh}",
+                    "fontSize": 14,
+                    "color": "@muted",
+                    "maxLines": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Text",
+            "text": "Sonnenstunden laut Wetterprognose · darunter der erwartete PV-Ertrag des Tages",
+            "fontSize": 13,
+            "color": "@muted",
+            "spacing": 6,
+            "maxLines": 1
+          }
         ]
       }
     }
   },
   "mainTemplate": {
-    "parameters": ["payload"],
+    "parameters": [
+      "payload"
+    ],
     "items": [
       {
         "type": "Frame",
@@ -164,11 +434,43 @@
                       "type": "Container",
                       "width": "33%",
                       "items": [
-                        { "type": "Text", "text": "${payload.datum}", "fontSize": 18, "color": "@muted", "maxLines": 1 },
-                        { "type": "Text", "text": "Solarstrom heute", "fontSize": 20, "color": "@text", "spacing": 8 },
-                        { "type": "Text", "text": "${payload.heuteKwh} kWh", "fontSize": 48, "fontWeight": "bold", "color": "@sun", "maxLines": 1 },
-                        { "type": "Text", "text": "${payload.heuteWetter}", "fontSize": 16, "color": "@muted", "maxLines": 1 },
-                        { "type": "Text", "text": "Morgen ${payload.morgenKwh} kWh · ${payload.morgenWetter}", "fontSize": 17, "color": "@text", "spacing": 8, "maxLines": 2 },
+                        {
+                          "type": "Text",
+                          "text": "${payload.datum}",
+                          "fontSize": 18,
+                          "color": "@muted",
+                          "maxLines": 1
+                        },
+                        {
+                          "type": "Text",
+                          "text": "Solarstrom heute",
+                          "fontSize": 20,
+                          "color": "@text",
+                          "spacing": 8
+                        },
+                        {
+                          "type": "Text",
+                          "text": "${payload.heuteKwh} kWh",
+                          "fontSize": 48,
+                          "fontWeight": "bold",
+                          "color": "@sun",
+                          "maxLines": 1
+                        },
+                        {
+                          "type": "Text",
+                          "text": "${payload.heuteWetter}",
+                          "fontSize": 16,
+                          "color": "@muted",
+                          "maxLines": 1
+                        },
+                        {
+                          "type": "Text",
+                          "text": "Morgen ${payload.morgenKwh} kWh · ${payload.morgenWetter}",
+                          "fontSize": 17,
+                          "color": "@text",
+                          "spacing": 8,
+                          "maxLines": 2
+                        },
                         {
                           "type": "Frame",
                           "backgroundColor": "@card",
@@ -189,14 +491,34 @@
                                 "paddingTop": 4,
                                 "paddingBottom": 4,
                                 "items": [
-                                  { "type": "Text", "text": "${data.label}", "fontSize": 15, "color": "@muted", "maxLines": 1 },
-                                  { "type": "Text", "text": "${data.value}", "fontSize": 17, "fontWeight": "bold", "color": "@text", "maxLines": 1 }
+                                  {
+                                    "type": "Text",
+                                    "text": "${data.label}",
+                                    "fontSize": 15,
+                                    "color": "@muted",
+                                    "maxLines": 1
+                                  },
+                                  {
+                                    "type": "Text",
+                                    "text": "${data.value}",
+                                    "fontSize": 17,
+                                    "fontWeight": "bold",
+                                    "color": "@text",
+                                    "maxLines": 1
+                                  }
                                 ]
                               }
                             ]
                           }
                         },
-                        { "type": "Text", "text": "${payload.jetzt.text}", "fontSize": 16, "color": "${payload.jetzt.farbe}", "spacing": 12, "maxLines": 2 }
+                        {
+                          "type": "Text",
+                          "text": "${payload.jetzt.text}",
+                          "fontSize": 16,
+                          "color": "${payload.jetzt.farbe}",
+                          "spacing": 12,
+                          "maxLines": 2
+                        }
                       ]
                     },
                     {
@@ -205,7 +527,13 @@
                       "shrink": 1,
                       "paddingLeft": 28,
                       "items": [
-                        { "type": "Text", "text": "Beste Startzeiten", "fontSize": 22, "fontWeight": "bold", "color": "@text" },
+                        {
+                          "type": "Text",
+                          "text": "Beste Startzeiten",
+                          "fontSize": 22,
+                          "fontWeight": "bold",
+                          "color": "@text"
+                        },
                         {
                           "type": "Container",
                           "spacing": 4,
@@ -218,16 +546,60 @@
                               "paddingTop": 5,
                               "paddingBottom": 5,
                               "items": [
-                                { "type": "Frame", "width": 12, "height": 12, "borderRadius": 6, "backgroundColor": "${data.farbe}" },
-                                { "type": "Text", "text": "${data.name}", "fontSize": 18, "color": "@text", "width": 140, "spacing": 10, "maxLines": 1 },
-                                { "type": "Text", "text": "${data.wann}", "fontSize": 18, "fontWeight": "bold", "color": "@text", "grow": 1, "shrink": 1, "maxLines": 1 },
-                                { "type": "Text", "text": "${data.info}", "fontSize": 15, "color": "@muted", "spacing": 8, "maxLines": 1 }
+                                {
+                                  "type": "Frame",
+                                  "width": 12,
+                                  "height": 12,
+                                  "borderRadius": 6,
+                                  "backgroundColor": "${data.farbe}"
+                                },
+                                {
+                                  "type": "Text",
+                                  "text": "${data.name}",
+                                  "fontSize": 18,
+                                  "color": "@text",
+                                  "width": 140,
+                                  "spacing": 10,
+                                  "maxLines": 1
+                                },
+                                {
+                                  "type": "Text",
+                                  "text": "${data.wann}",
+                                  "fontSize": 18,
+                                  "fontWeight": "bold",
+                                  "color": "@text",
+                                  "grow": 1,
+                                  "shrink": 1,
+                                  "maxLines": 1
+                                },
+                                {
+                                  "type": "Text",
+                                  "text": "${data.info}",
+                                  "fontSize": 15,
+                                  "color": "@muted",
+                                  "spacing": 8,
+                                  "maxLines": 1
+                                }
                               ]
                             }
                           ]
                         },
-                        { "type": "Text", "text": "${payload.hinweis}", "fontSize": 14, "color": "@muted", "spacing": 4, "maxLines": 2 },
-                        { "type": "Text", "text": "Sonnenstrom-Prognose heute · grün = empfohlene Laufzeit", "fontSize": 14, "color": "@muted", "spacing": 12, "maxLines": 1 },
+                        {
+                          "type": "Text",
+                          "text": "${payload.hinweis}",
+                          "fontSize": 14,
+                          "color": "@muted",
+                          "spacing": 4,
+                          "maxLines": 2
+                        },
+                        {
+                          "type": "Text",
+                          "text": "Sonnenstrom-Prognose heute · grün = empfohlene Laufzeit",
+                          "fontSize": 14,
+                          "color": "@muted",
+                          "spacing": 12,
+                          "maxLines": 1
+                        },
                         {
                           "type": "Container",
                           "direction": "row",
@@ -243,8 +615,22 @@
                               "justifyContent": "end",
                               "alignItems": "center",
                               "items": [
-                                { "type": "Frame", "width": "70%", "height": "${data.h}", "borderRadius": 3, "backgroundColor": "${data.c}", "opacity": "${data.o}" },
-                                { "type": "Text", "text": "${data.l}", "fontSize": 13, "color": "@muted", "height": 20, "spacing": 4 }
+                                {
+                                  "type": "Frame",
+                                  "width": "70%",
+                                  "height": "${data.h}",
+                                  "borderRadius": 3,
+                                  "backgroundColor": "${data.c}",
+                                  "opacity": "${data.o}"
+                                },
+                                {
+                                  "type": "Text",
+                                  "text": "${data.l}",
+                                  "fontSize": 13,
+                                  "color": "@muted",
+                                  "height": 20,
+                                  "spacing": 4
+                                }
                               ]
                             }
                           ]
@@ -253,8 +639,18 @@
                     }
                   ]
                 },
-                { "type": "Diagrammseite", "block": "${payload.woche}" },
-                { "type": "Diagrammseite", "block": "${payload.monat}" }
+                {
+                  "type": "Diagrammseite",
+                  "block": "${payload.woche}"
+                },
+                {
+                  "type": "Diagrammseite",
+                  "block": "${payload.monat}"
+                },
+                {
+                  "type": "Sonnenseite",
+                  "sonne": "${payload.sonne}"
+                }
               ]
             },
             {
@@ -266,8 +662,22 @@
               "paddingBottom": 10,
               "paddingTop": 4,
               "items": [
-                { "type": "Text", "text": "${payload.quelle}", "fontSize": 13, "color": "@muted", "shrink": 1, "maxLines": 1 },
-                { "type": "Text", "text": "Wischen: Heute · Woche · Monat   ${payload.stand}", "fontSize": 13, "color": "@muted", "spacing": 12, "maxLines": 1 }
+                {
+                  "type": "Text",
+                  "text": "${payload.quelle}",
+                  "fontSize": 13,
+                  "color": "@muted",
+                  "shrink": 1,
+                  "maxLines": 1
+                },
+                {
+                  "type": "Text",
+                  "text": "Wischen: Heute · Woche · Monat · Sonne   ${payload.stand}",
+                  "fontSize": 13,
+                  "color": "@muted",
+                  "spacing": 12,
+                  "maxLines": 1
+                }
               ]
             }
           ]

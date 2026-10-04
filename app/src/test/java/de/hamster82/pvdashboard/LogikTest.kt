@@ -72,6 +72,19 @@ class LogikTest {
     }
 
     @Test
+    fun sonnenstunden() {
+        val s = Settings()
+        val r0 = antwort(-90.0).put("daily", JSONObject()
+            .put("time", JSONArray().put("2026-09-28").put("2026-09-29"))
+            .put("sunshine_duration", JSONArray().put(27000.0).put(JSONObject.NULL))
+            .put("daylight_duration", JSONArray().put(43200.0).put(43000.0)))
+        val m = Forecast.build(s, s.flaechen, listOf(r0, antwort(90.0)))
+        assertEquals(1, m.sonne.size)
+        assertEquals(7.5, m.sonne[0].sonneH, 1e-9)
+        assertEquals(12.0, m.sonne[0].tagH!!, 1e-9)
+    }
+
+    @Test
     fun lastprofil() {
         val g = Settings().geraete.first()
         val q = Planner.quarterProfile(g)

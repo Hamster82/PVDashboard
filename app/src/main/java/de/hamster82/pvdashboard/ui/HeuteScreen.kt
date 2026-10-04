@@ -114,6 +114,17 @@ fun HeuteScreen(d: DashboardData, s: Settings) {
             Klein("Grün = empfohlene Laufzeit der Geräte · Balken = erwartete PV-Leistung je Stunde")
         }
 
+        // Sonnenstunden der nächsten 7 Tage
+        if (d.sonne.isNotEmpty()) Karte {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Titel("Sonnenstunden – 7 Tage")
+                Spacer(Modifier.weight(1f))
+                Klein("${fmt(d.sonne.sumOf { it.sonneH }, 0)} h gesamt")
+            }
+            SonnenChart(d.sonne, d.zeit.toLocalDate())
+            Klein("Balken = Sonnenstunden, Hintergrund = Tageslicht · darunter erwarteter PV-Ertrag")
+        }
+
         Klein(
             when {
                 d.live != null -> "Live-Daten: Kostal Plenticore (${d.liveAdresse})"
@@ -187,6 +198,44 @@ private fun StundenChart(kw: DoubleArray, plan: TagPlan?, ids: Set<String>, jetz
                     if (h < jetztStunde) Box(Modifier.fillMaxWidth(0.8f).fillMaxHeight((v / max).toFloat().coerceIn(0.015f, 1f)).background(Farbe.Bg.copy(alpha = 0.6f)))
                 }
                 Text(if (h % 2 == 0) "$h" else "", fontSize = 11.sp, color = Farbe.Muted, modifier = Modifier.height(16.dp))
+            }
+        }
+    }
+}
+
+@Composable
+private fun SonnenChart(tage: List<de.hamster82.pvdashboard.data.SonnenPrognose>, heute: java.time.LocalDate) {
+    val max = tage.maxOf { it.tagH ?: it.sonneH }.coerceAtLeast(1.0)
+    Spacer(Modifier.height(10.dp))
+    Row(Modifier.fillMaxWidth().height(200.dp), verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        tage.forEach { t ->
+            val anteil = t.tagH?.let { t.sonneH / it } ?: 0.5
+            val farbe = when {
+                anteil >= 0.5 -> Farbe.Sun
+                anteil >= 0.2 -> Color(0xFFC99A3A)
+                else -> Farbe.Muted
+            }
+            val label = when (t.datum) {
+                heute -> "Heute"
+                heute.plusDays(1) -> "Morgen"
+                else -> t.datum.dayOfWeek.getDisplayName(java.time.format.TextStyle.SHORT, Locale.GERMANY).trimEnd('.')
+            }
+            Column(Modifier.weight(1f).fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Bottom) {
+                Text("${fmt(t.sonneH)} h", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = farbe, maxLines = 1)
+                Box(Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
+                    Box(
+                        Modifier.fillMaxWidth(0.8f).fillMaxHeight(((t.tagH ?: t.sonneH) / max).toFloat().coerceIn(0.02f, 1f))
+                            .clip(RoundedCornerShape(5.dp)).background(Farbe.Night.copy(alpha = 0.45f)),
+                        contentAlignment = Alignment.BottomCenter,
+                    ) {
+                        Box(
+                            Modifier.fillMaxWidth().fillMaxHeight((t.sonneH / (t.tagH ?: max)).toFloat().coerceIn(0.02f, 1f))
+                                .clip(RoundedCornerShape(5.dp)).background(farbe),
+                        )
+                    }
+                }
+                Text(label, fontSize = 11.sp, color = Farbe.Text, maxLines = 1, modifier = Modifier.padding(top = 4.dp))
+                Text(t.kwh?.let { "${fmt(it, 0)} kWh" } ?: "", fontSize = 10.sp, color = Farbe.Muted, maxLines = 1)
             }
         }
     }
